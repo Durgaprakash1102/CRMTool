@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .employee-table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .employee-table th,
+        .employee-table td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .employee-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+        }
+        
+        .employee-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .employee-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .employee-table td {
+            color: #333;
+            font-size: 0.9em;
+        }
+        
+        .employee-link {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .employee-link:hover {
+            color: #45a049;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: #999;
+            font-size: 1.2em;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Employee List</h1>
+
+    <table class="employee-table">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Employee ID</th>
+                <th>Job Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if employees %} {% for employee in employees %}
+            <tr>
+                <td><a href="{% url 'employee_detail' employee.pk %}" class="employee-link">{{ employee.first_name }}</a></td>
+                <td>{{ employee.employee_id }}</td>
+                <td>{{ employee.position }}</td>
+            </tr>
+            {% endfor %} {% else %}
+            <tr>
+                <td colspan="3" class="empty-message">No employees found.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+
+</html>
